@@ -1,6 +1,7 @@
 ---
 name: oxynet-cpet
 description: Analyse cardiopulmonary exercise test (CPET) files with Oxynet's hosted API. Use when the user has a metabolic cart export (COSMED, Cortex, PNOE, VO2 Master and other formats, as CSV, XLSX, TXT or XML) or asks for ventilatory thresholds (VT1, VT2, GET, RCP), VO2max, the VE/VCO2 slope, FATMAX or fat and carbohydrate oxidation, exercise oscillatory ventilation, or the signal quality of a CPET recording. Oxynet's validated models compute the physiology; do not estimate thresholds from the trace yourself. Needs an Oxynet API key in OXYNET_API_KEY.
+license: Apache-2.0
 ---
 
 # CPET analysis with Oxynet

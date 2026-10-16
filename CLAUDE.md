@@ -72,7 +72,9 @@ The skill converts it with `tojson`, which works before and after that fix.
 
 ## Before making the repo public
 
-- Choose a licence (none is declared yet, in the repo or in `plugin.json`).
+- ~~Choose a licence~~ Done 2026-10-16: Apache-2.0 (`LICENSE` is the unmodified official text,
+  copyright and the name clause in `NOTICE`; declared in `plugin.json` and the SKILL.md
+  frontmatter). Chosen for its explicit statement that it grants no right to the Oxynet name.
 - Check that the skill fires from its description alone in Claude Code (`claude plugin eval`)
   and in Gemini CLI.
 - Add the `gemini-cli-extension` GitHub topic (the Gemini gallery indexes tagged public

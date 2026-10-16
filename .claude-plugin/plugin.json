@@ -5,5 +5,6 @@
   "author": { "name": "Andrea Zignoli", "url": "https://github.com/andreazignoli" },
   "homepage": "https://www.oxynet.net/developers",
   "repository": "https://github.com/andreazignoli/oxynet-skills",
+  "license": "Apache-2.0",
   "keywords": ["cpet", "exercise-testing", "ventilatory-thresholds", "physiology", "oxynet"]
 }

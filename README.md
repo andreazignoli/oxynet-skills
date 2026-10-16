@@ -54,6 +54,12 @@ The agent sends the file you name and nothing else. Oxynet parses the bytes and 
 them, and deletes the parsed record after 24 hours. It needs no patient identifiers, so
 anonymise a name or a date of birth before uploading.
 
+## License
+
+Apache License 2.0 ([LICENSE](LICENSE), [NOTICE](NOTICE)). Use, copy and adapt the skill
+freely; the license grants no right to the Oxynet name, and using the Oxynet API requires a
+key and is subject to its own terms.
+
 ## Links
 
 - Agent guide: https://app.oxynet.net/llms.txt
