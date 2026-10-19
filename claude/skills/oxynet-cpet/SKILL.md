@@ -12,7 +12,9 @@ instructions describe each tool in detail; this file states the rules.
 
 If the Oxynet tools are not available yet, the user has to sign in once: in Claude Code,
 run `/mcp`, choose `oxynet` and sign in, pasting their Oxynet API key on Oxynet's page.
-Someone without a key can get a free one at https://app.oxynet.net/signup.
+If `/mcp` lists no `oxynet`, the user already has Oxynet as a claude.ai connector, which
+Claude Code uses instead: they sign in there (claude.ai, Settings, Connectors) and start a
+new session. Someone without a key can get a free one at https://app.oxynet.net/signup.
 
 ## Rules
 

@@ -35,6 +35,14 @@ The root skill keeps the curl route for tools without MCP sign-in. When a rule c
 change it in both `SKILL.md` files; `LICENSE` and `NOTICE` in `claude/` must stay byte-identical
 to the root ones (`cmp` them).
 
+**A claude.ai Oxynet connector hides the plugin's server.** Claude Code suppresses a plugin
+MCP server whose URL duplicates a claude.ai connector (its debug log: "Lazy dedup:
+suppressing 1 plugin server(s) that duplicate claude.ai connectors"), so for someone with
+both, `/mcp` lists no `oxynet` and the connector's tools serve the skill. Sign-in then
+happens on claude.ai. Both READMEs and the skill say so (found 2026-10-19, the founder's
+first install). Signing in from Claude Code needs core v67 or later: before it the server
+never answered 401, so Claude Code saw it as connected and offered no sign-in.
+
 `claude plugin validate .` (marketplace) and `claude plugin validate ./claude --strict` pass.
 CLAUDE.md is at the repo root, outside the plugin folder, so it no longer draws the
 "not loaded as plugin context" warning.
@@ -92,4 +100,4 @@ CLI gallery indexes it on its own. Checked first: the skill fires from its descr
 Anthropic's plugin directory: submitted from claude.ai/directory/manage, **Plugin bundle**,
 repository `andreazignoli/oxynet-skills`, plugin path `claude`. The MCP server is submitted
 separately as an **MCP connector** (its tools carry the required titles and hints since core
-v66). Both by the founder from his own account.
+v66). Both from the founder's own account.

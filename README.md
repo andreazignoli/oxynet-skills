@@ -24,7 +24,9 @@ system, the one command that saves it as `OXYNET_API_KEY`.
 ```
 
 Then run `/mcp`, choose `oxynet` and sign in: Oxynet's page asks for your key once. No
-environment variable is needed.
+environment variable is needed. If you already added Oxynet as a connector on claude.ai,
+Claude Code uses that connector instead and lists no separate `oxynet` server: sign in
+there (claude.ai, Settings, Connectors) and the plugin's skill uses its tools.
 
 **Gemini CLI**
 
