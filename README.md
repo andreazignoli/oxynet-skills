@@ -16,8 +16,8 @@ several tools:
 ## Install
 
 You need an Oxynet API key, available to the agent as the `OXYNET_API_KEY` environment
-variable (for example in your shell profile). Keys are issued on request:
-[www.oxynet.net/developers/quickstart](https://www.oxynet.net/developers/quickstart).
+variable. Get a free key at [app.oxynet.net/signup](https://app.oxynet.net/signup): the page
+gives you, for your system, the one command that saves it where agents find it.
 
 **Claude Code**
 
@@ -36,7 +36,9 @@ gemini extensions install https://github.com/andreazignoli/oxynet-skills
 directory.
 
 Then hand the agent a CPET export and ask for what you need: "what are the ventilatory
-thresholds in `tests/athlete_03.xlsx`?"
+thresholds in `tests/athlete_03.xlsx`?" The agent asks you before each call to Oxynet
+(Claude Code shows it as a command to approve). That is expected: it is the moment you decide
+that a file leaves your computer.
 
 ## What Oxynet does
 
@@ -57,8 +59,10 @@ anonymise a name or a date of birth before uploading.
 ## License
 
 Apache License 2.0 ([LICENSE](LICENSE), [NOTICE](NOTICE)). Use, copy and adapt the skill
-freely; the license grants no right to the Oxynet name, and using the Oxynet API requires a
-key and is subject to its own terms.
+freely. If you redistribute it, modified or not, keep the attribution in [NOTICE](NOTICE):
+section 4(d) of the license requires it. The license grants no right to the Oxynet name,
+and using the Oxynet API requires a key and is subject to its own
+[terms](https://www.oxynet.net/terms).
 
 ## Links
 

@@ -1,6 +1,6 @@
 ---
 name: oxynet-cpet
-description: Analyse cardiopulmonary exercise test (CPET) files with Oxynet's hosted API. Use when the user has a metabolic cart export (COSMED, Cortex, PNOE, VO2 Master and other formats, as CSV, XLSX, TXT or XML) or asks for ventilatory thresholds (VT1, VT2, GET, RCP), VO2max, the VE/VCO2 slope, FATMAX or fat and carbohydrate oxidation, exercise oscillatory ventilation, or the signal quality of a CPET recording. Oxynet's validated models compute the physiology; do not estimate thresholds from the trace yourself. Needs an Oxynet API key in OXYNET_API_KEY.
+description: Analyse cardiopulmonary exercise test (CPET) files with Oxynet's hosted API. Use when the user has a metabolic cart export (COSMED, Cortex, PNOE, VO2 Master and other formats, as CSV, XLSX, TXT, XML or JSON) or asks for ventilatory thresholds (VT1, VT2, GET, RCP), VO2max, the VE/VCO2 slope, FATMAX or fat and carbohydrate oxidation, exercise oscillatory ventilation, or the signal quality of a CPET recording. Oxynet's validated models compute the physiology; do not estimate thresholds from the trace yourself. Needs an Oxynet API key in OXYNET_API_KEY.
 license: Apache-2.0
 ---
 
@@ -21,8 +21,8 @@ your commands. `OXYNET_API_URL` is only for testing against another server; leav
 If `OXYNET_API_KEY` is not set, ask the user to make it available as that environment
 variable (for example in their shell profile) rather than pasting it into the
 conversation. If they paste it anyway, use it for this session only: never write it into a
-file and never repeat it back. Someone without a key can request one at
-https://www.oxynet.net/developers/quickstart.
+file and never repeat it back. Someone without a key can get a free one at
+https://app.oxynet.net/signup (it takes a minute).
 
 Check what the key may do, and tell the user which analyses it includes:
 
