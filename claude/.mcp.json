@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "oxynet": {
+      "type": "http",
+      "url": "https://app.oxynet.net/oxynet-mcp"
+    }
+  }
+}

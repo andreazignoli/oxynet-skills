@@ -1,23 +1,20 @@
 # Oxynet skills
 
-Teaches AI coding agents to analyse cardiopulmonary exercise tests (CPET) with
-[Oxynet](https://www.oxynet.net), over its REST API. No MCP connector is needed: the agent
-uploads the vendor file, receives a handle, and asks for the analyses by name.
+Teaches AI agents to analyse cardiopulmonary exercise tests (CPET) with
+[Oxynet](https://www.oxynet.net): the agent hands Oxynet the vendor file, receives a handle,
+and asks for the analyses by name. Oxynet's validated models compute the physiology.
 
-One skill, [`skills/oxynet-cpet/SKILL.md`](skills/oxynet-cpet/SKILL.md), packaged for
-several tools:
+| Tool | What to install | How it reaches Oxynet |
+|---|---|---|
+| Claude Code, Claude chat, Cowork | The plugin in [`claude/`](claude/) | The Oxynet MCP server; you sign in once with your key |
+| Gemini CLI | The extension (`gemini-extension.json`) | REST with curl, key in `OXYNET_API_KEY` |
+| OpenAI Codex, Cursor, GitHub Copilot and others | The skill in [`skills/oxynet-cpet/`](skills/oxynet-cpet/SKILL.md) | REST with curl, key in `OXYNET_API_KEY` |
 
-| Tool | How it is packaged |
-|---|---|
-| Claude Code | Plugin marketplace (`.claude-plugin/`) |
-| Gemini CLI | Extension (`gemini-extension.json`) |
-| OpenAI Codex, Cursor, GitHub Copilot and others | The Agent Skills format the skill is written in |
+You need an Oxynet API key. Get a free one at
+[app.oxynet.net/signup](https://app.oxynet.net/signup): the page also gives you, for your
+system, the one command that saves it as `OXYNET_API_KEY`.
 
 ## Install
-
-You need an Oxynet API key, available to the agent as the `OXYNET_API_KEY` environment
-variable. Get a free key at [app.oxynet.net/signup](https://app.oxynet.net/signup): the page
-gives you, for your system, the one command that saves it where agents find it.
 
 **Claude Code**
 
@@ -25,6 +22,9 @@ gives you, for your system, the one command that saves it where agents find it.
 /plugin marketplace add andreazignoli/oxynet-skills
 /plugin install oxynet@oxynet
 ```
+
+Then run `/mcp`, choose `oxynet` and sign in: Oxynet's page asks for your key once. No
+environment variable is needed.
 
 **Gemini CLI**
 
@@ -36,9 +36,8 @@ gemini extensions install https://github.com/andreazignoli/oxynet-skills
 directory.
 
 Then hand the agent a CPET export and ask for what you need: "what are the ventilatory
-thresholds in `tests/athlete_03.xlsx`?" The agent asks you before each call to Oxynet
-(Claude Code shows it as a command to approve). That is expected: it is the moment you decide
-that a file leaves your computer.
+thresholds in `tests/athlete_03.xlsx`?" The agent asks you before each call that sends a file
+to Oxynet. That is expected: it is the moment you decide that a file leaves your computer.
 
 ## What Oxynet does
 
