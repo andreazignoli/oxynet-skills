@@ -7,7 +7,7 @@ cross-repo rules, which apply here too (no em dashes in anything an agent or a u
 no confidence percentage, sell measurement rather than AI, the oscillation beta caveat
 wherever oscillation is mentioned).
 
-Created 2026-10-15, private until it is made public on purpose. It was kept apart from
+Created 2026-10-15, public since 2026-10-19 (the founder's decision). It was kept apart from
 `pyoxynet` so the package can be reworked on its own schedule and a plugin install does
 not clone the package's 200 MB of history.
 
