@@ -23,6 +23,10 @@ The first time Claude uses Oxynet, you sign in once: in Claude Code run `/mcp`, 
 `oxynet`, and paste your Oxynet API key on Oxynet's sign-in page. Get a free key at
 [app.oxynet.net/signup](https://app.oxynet.net/signup).
 
+Already added Oxynet as a connector on claude.ai? Claude Code then uses that connector and
+lists no separate `oxynet` server. Sign in there (claude.ai, Settings, Connectors) and this
+plugin's skill uses its tools.
+
 ## What it sends, and where
 
 - **Only the files you name**, unchanged, to Oxynet at `app.oxynet.net` over HTTPS. Claude
