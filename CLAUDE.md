@@ -14,18 +14,30 @@ not clone the package's 200 MB of history.
 ## Layout
 
 ```
-skills/oxynet-cpet/SKILL.md       the skill, Agent Skills open standard (agentskills.io)
-.claude-plugin/marketplace.json   Claude Code marketplace "oxynet", one plugin whose source is "./"
-.claude-plugin/plugin.json        the plugin "oxynet"; skills/ is discovered, not declared
-gemini-extension.json             Gemini CLI extension; it discovers skills/ on its own
+claude/                           the Claude plugin (directory submission: plugin path "claude")
+  .claude-plugin/plugin.json      name "oxynet", listing fields (icon, privacy, terms, support)
+  .mcp.json                       the remote MCP server, no credential: the user signs in by OAuth
+  skills/oxynet-cpet/SKILL.md     the MCP variant of the skill: rules, tool names, no curl
+  README.md, LICENSE, NOTICE      copies of LICENSE and NOTICE: an install receives this folder only
+  icon.svg                        the app's mark in Oxynet green on the app's dark ground
+skills/oxynet-cpet/SKILL.md       the curl variant, for Gemini CLI, Codex and any Agent Skills tool
+.claude-plugin/marketplace.json   Claude Code marketplace "oxynet", one plugin, source "./claude"
+gemini-extension.json             Gemini CLI extension at the root; it discovers skills/ on its own
 ```
 
-The repo root is the plugin root, so everything here is copied into a user's plugin cache.
-Keep it to the skill and its manifests.
+**Two variants of one skill, on purpose (2026-10-19).** Anthropic's directory holds for a
+reviewer any plugin that reads a credential from the user's environment (`$OXYNET_API_KEY`)
+and sends it to a server, and a plugin's own sensitive `userConfig` value is not substituted
+into skill text, so the curl route cannot work inside a Claude plugin. The plugin therefore
+declares the MCP server without any credential and the user signs in once through Oxynet's
+OAuth page, which also makes it work in claude.ai chat and Cowork, where there is no shell.
+The root skill keeps the curl route for tools without MCP sign-in. When a rule changes,
+change it in both `SKILL.md` files; `LICENSE` and `NOTICE` in `claude/` must stay byte-identical
+to the root ones (`cmp` them).
 
-`claude plugin validate .` passes. With `--strict` it fails on one warning, that this
-CLAUDE.md is not loaded as plugin context. That is expected: this file is for sessions
-working on the repo, not for the people who install the plugin.
+`claude plugin validate .` (marketplace) and `claude plugin validate ./claude --strict` pass.
+CLAUDE.md is at the repo root, outside the plugin folder, so it no longer draws the
+"not loaded as plugin context" warning.
 
 ## Rules for the skill
 
@@ -70,13 +82,14 @@ First run, 2026-10-15: every command worked except the sample pipe, which expose
 bug (`/v1/cpet/content` refused the sample's `content` object; fixed in oxynet-core PR #11).
 The skill converts it with `tojson`, which works before and after that fix.
 
-## Before making the repo public
+## Public, and the directories
 
-- ~~Choose a licence~~ Done 2026-10-16: Apache-2.0 (`LICENSE` is the unmodified official text,
-  copyright and the name clause in `NOTICE`; declared in `plugin.json` and the SKILL.md
-  frontmatter). Chosen for its explicit statement that it grants no right to the Oxynet name.
-- Check that the skill fires from its description alone in Claude Code (`claude plugin eval`)
-  and in Gemini CLI.
-- Add the `gemini-cli-extension` GitHub topic (the Gemini gallery indexes tagged public
-  repos daily; there is nothing to submit).
-- Submit the plugin to Anthropic's directory at claude.ai/directory/manage.
+Public since 2026-10-19 under Apache-2.0, with the `gemini-cli-extension` topic, so the Gemini
+CLI gallery indexes it on its own. Checked first: the skill fires from its description alone
+(a headless Claude Code session, prompt not naming Oxynet, first action
+`Skill: oxynet:oxynet-cpet`), and the history holds no secret.
+
+Anthropic's plugin directory: submitted from claude.ai/directory/manage, **Plugin bundle**,
+repository `andreazignoli/oxynet-skills`, plugin path `claude`. The MCP server is submitted
+separately as an **MCP connector** (its tools carry the required titles and hints since core
+v66). Both by the founder from his own account.
