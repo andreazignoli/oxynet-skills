@@ -1,0 +1,13 @@
+{
+  "name": "oxynet",
+  "owner": { "name": "Andrea Zignoli", "url": "https://github.com/andreazignoli" },
+  "description": "Oxynet for coding agents: analyse CPET files through the Oxynet API.",
+  "plugins": [
+    {
+      "name": "oxynet",
+      "source": "./",
+      "description": "Analyse cardiopulmonary exercise test (CPET) files through the Oxynet API.",
+      "category": "science"
+    }
+  ]
+}
