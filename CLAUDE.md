@@ -103,3 +103,9 @@ orchestration repo, `docs/listings/anthropic-directory.md`. The plugin follows f
 claude.ai/directory/manage as a **Plugin bundle**, repository `andreazignoli/oxynet-skills`,
 plugin path `claude`. A plugin may connect to any connector approved in the directory, so the
 listing also clears the plugin's one MCP server.
+
+The plugin bundle was submitted 2026-10-20, tracking `main`. A GitHub push webhook (push events
+only, JSON, secret held by GitHub) notifies the directory, so **every merge to `main` is
+picked up and scanned as a new version**: run both `claude plugin validate` commands before
+merging. A lost webhook secret is replaced with Rotate secret on the plugin's Settings tab
+at claude.ai/directory/manage.
