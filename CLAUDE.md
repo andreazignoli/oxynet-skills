@@ -20,6 +20,13 @@ claude/                           the Claude plugin (directory submission: plugi
   skills/oxynet-cpet/SKILL.md     the MCP variant of the skill: rules, tool names, no curl
   README.md, LICENSE, NOTICE      copies of LICENSE and NOTICE: an install receives this folder only
   icon.svg                        the app's mark in Oxynet green on the app's dark ground
+openai/                           the ChatGPT and Codex plugin (OpenAI portable format), zipped for upload
+  plugin.json                     identity + extensions.com.openai: listing, 5+3 review cases, release notes
+  mcp.json                        the remote MCP server, OAuth by dynamic client registration
+  skills/oxynet-cpet/SKILL.md     the MCP variant again, with ChatGPT's sign-in paragraph
+  assets/logo.png, icon.png       512 and 256 px renders of claude/icon.svg
+  README.md, LICENSE, NOTICE      as in claude/
+scripts/package-openai.sh         checks the copies match, writes dist/oxynet-openai-<version>.zip
 skills/oxynet-cpet/SKILL.md       the curl variant, for Gemini CLI, Codex and any Agent Skills tool
 .claude-plugin/marketplace.json   Claude Code marketplace "oxynet", one plugin, source "./claude"
 gemini-extension.json             Gemini CLI extension at the root; it discovers skills/ on its own
@@ -32,8 +39,20 @@ into skill text, so the curl route cannot work inside a Claude plugin. The plugi
 declares the MCP server without any credential and the user signs in once through Oxynet's
 OAuth page, which also makes it work in claude.ai chat and Cowork, where there is no shell.
 The root skill keeps the curl route for tools without MCP sign-in. When a rule changes,
-change it in both `SKILL.md` files; `LICENSE` and `NOTICE` in `claude/` must stay byte-identical
-to the root ones (`cmp` them).
+change it in all three `SKILL.md` files (root, `claude/`, `openai/`); the `## Rules` sections of
+`claude/` and `openai/` must be identical, and `LICENSE` and `NOTICE` in both folders must stay
+byte-identical to the root ones. `scripts/package-openai.sh` refuses to build otherwise.
+
+**The OpenAI package (2026-10-20).** OpenAI's portable format puts `plugin.json` at the ZIP root,
+with listing fields, review test cases and release notes under `extensions.com.openai`; the
+upload at platform.openai.com/plugins imports them. Reviewer credentials and the demo video URL
+are entered in the dashboard, never in the package (`test_credentials` is rejected). The OAuth
+declaration sits in `mcp.json` under the server's `extensions.com.openai.auth`, as OpenAI's docs
+show, although the public agent-plugins.org 1.0.0 schema does not allow it there; if an upload
+refuses it, delete the block, since the server advertises DCR by discovery anyway. Category is
+Education & Research, not Healthcare, matching the research-only terms. `brandColor` is the
+registry's gradient blue because the Oxynet green fails OpenAI's 2:1 contrast on white (1.8).
+The expected results in the review cases were run against a local server on 2026-10-20.
 
 **A claude.ai Oxynet connector hides the plugin's server.** Claude Code suppresses a plugin
 MCP server whose URL duplicates a claude.ai connector (its debug log: "Lazy dedup:

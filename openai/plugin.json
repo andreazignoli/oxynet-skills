@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "oxynet",
+  "version": "1.0.0",
+  "description": "Analyse cardiopulmonary exercise test (CPET) files with Oxynet: ventilatory thresholds, substrate use, oscillatory ventilation and signal quality, computed by validated models.",
+  "author": {
+    "name": "Andrea Zignoli",
+    "email": "andrea.zignoli@unitn.it",
+    "url": "https://www.oxynet.net"
+  },
+  "homepage": "https://www.oxynet.net/developers/mcp",
+  "repository": "https://github.com/andreazignoli/oxynet-skills",
+  "license": "Apache-2.0",
+  "keywords": ["cpet", "exercise-testing", "ventilatory-thresholds", "physiology", "sports-science"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Oxynet",
+        "shortDescription": "Exercise test (CPET) analysis",
+        "longDescription": "Oxynet turns the raw export of a cardiopulmonary exercise test (CPET) into structured, versioned measurements. Give ChatGPT a metabolic cart file (COSMED, Cortex, PNOE, VO2 Master and other formats, detected automatically) and ask: Oxynet returns the ventilatory thresholds VT1 and VT2, fat and carbohydrate oxidation with FATMAX, exercise oscillatory ventilation, and checks on the quality of the recording. ChatGPT routes the question and explains the answer; Oxynet's validated models, described in peer-reviewed publications, compute the physiology.\n\nWho it is for: exercise physiologists, sports scientists, coaches, researchers and students who work with CPET recordings.\n\nHow it works: the recording is uploaded unchanged and analysed on Oxynet's servers by handle. Each result carries its provenance and a quality grade for the recording. A refusal states its reason, for example when a channel an analysis needs is missing. To try it without any data, ask for Oxynet's synthetic sample.\n\nPrivacy: Oxynet reads each file and discards it, keeps the parsed recording for 24 hours, and never trains its models on uploads. It needs no personal identifiers: remove names and dates of birth from an export before sharing it.\n\nLimitations: research software, not a diagnostic device, and it gives measurements, not clinical conclusions. No result carries a confidence score, because nothing is calibrated against clinical outcomes. Oscillatory ventilation analysis is beta: it was developed on one heart failure cohort and its transportability is untested.\n\nAn Oxynet API key is needed to connect: a free key takes a minute at app.oxynet.net/signup (sign in with Google or GitHub), and it is entered once on Oxynet's sign-in page.",
+        "developerName": "Andrea Zignoli",
+        "category": "Education & Research",
+        "capabilities": [
+          "Ventilatory thresholds VT1 and VT2",
+          "Fat and carbohydrate oxidation and FATMAX",
+          "Exercise oscillatory ventilation (beta)",
+          "Recording quality checks"
+        ],
+        "websiteURL": "https://www.oxynet.net",
+        "supportURL": "https://www.oxynet.net/#contact",
+        "privacyPolicyURL": "https://www.oxynet.net/privacy",
+        "termsOfServiceURL": "https://www.oxynet.net/terms",
+        "defaultPrompt": [
+          "Load the Oxynet synthetic sample and find its ventilatory thresholds.",
+          "Find VT1 and VT2 in my CPET export.",
+          "What is the FATMAX in this exercise test?"
+        ],
+        "brandColor": "#155799",
+        "brandColorDark": "#00dc82",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Check what the connected key can do",
+              "prompt": "What can Oxynet do with my key, and which metrics can it compute?",
+              "tools_triggered": "get_capabilities, list_metrics",
+              "expected_behavior": "Lists the analyses the key includes (ventilatory thresholds, oscillatory ventilation, substrate use), the threshold models it can reach, its monthly limit and the metrics Oxynet can compute. No confidence score is mentioned or invented."
+            },
+            {
+              "description": "Ventilatory thresholds on the synthetic sample",
+              "prompt": "Load the Oxynet synthetic sample and give me its ventilatory thresholds.",
+              "tools_triggered": "get_sample_cpet, analyze_cpet",
+              "expected_behavior": "Reports VT1 at about 562 s (VO2 about 2,386 mL/min) and VT2 at about 726 s (VO2 about 2,951 mL/min), says the sample is synthetic and not validation data, and gives no confidence percentage."
+            },
+            {
+              "description": "Derived metrics and substrate use on the synthetic sample",
+              "prompt": "Load the Oxynet synthetic sample and tell me its VO2max, its gas quality and its FATMAX.",
+              "tools_triggered": "get_sample_cpet, compute_metrics",
+              "expected_behavior": "Reports VO2max of about 3,380 mL/min, gas quality confirmed, and FATMAX at about 61% of peak VO2 with about 0.56 g/min of fat, noting that the test is a ramp, so FATMAX reads high and is not comparable with a graded test."
+            },
+            {
+              "description": "Oscillatory ventilation on the oscillating synthetic sample (beta)",
+              "prompt": "Load Oxynet's oscillating synthetic sample and check it for exercise oscillatory ventilation.",
+              "tools_triggered": "get_sample_cpet, analyze_cpet",
+              "expected_behavior": "Reports severe oscillatory breathing (ventilation swinging by about 18 L/min every 58 seconds through almost the whole test) and says the analysis is beta: developed on one heart failure cohort, transportability untested."
+            },
+            {
+              "description": "Inspect, plot and delete a recording",
+              "prompt": "Load the Oxynet synthetic sample, tell me which channels it has, plot its ventilation over time, then delete it.",
+              "tools_triggered": "get_sample_cpet, get_cpet, get_cpet_series, delete_cpet",
+              "expected_behavior": "Lists the channels present (VO2, VCO2, VE, HR, RF, PetO2, PetCO2) and that the work rate is absent, with the reason; plots ventilation over time from a downsampled series; confirms that the recording was deleted."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Unrelated request: no Oxynet tool should be used.",
+              "prompt": "What will the weather be in Verona tomorrow?"
+            },
+            {
+              "description": "Clinical diagnosis: Oxynet is research software that returns measurements, not diagnoses, so the request is declined or answered with measurements and that caveat, without a diagnosis.",
+              "prompt": "Here is my father's exercise test. Does he have heart failure?"
+            },
+            {
+              "description": "Searching the user's files: Oxynet only analyses files the user provides, so the assistant asks the user to attach the files instead of searching for them.",
+              "prompt": "Search my computer for all my CPET files and analyse every one of them."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Oxynet sells nothing in ChatGPT. API keys are free and issued at app.oxynet.net/signup."
+      },
+      "publication": {
+        "release_notes": "First release: ventilatory thresholds, substrate use, oscillatory ventilation (beta) and recording quality from CPET exports, through Oxynet's MCP server with OAuth sign-in."
+      }
+    }
+  }
+}
