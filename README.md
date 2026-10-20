@@ -72,3 +72,5 @@ and using the Oxynet API requires a key and is subject to its own
 - OpenAPI schema: https://app.oxynet.net/v1/openapi.json
 - Developer docs: https://www.oxynet.net/developers
 - MCP server, for assistants that prefer a connector: https://app.oxynet.net/oxynet-mcp
+  (in claude.ai and Claude Desktop, Oxynet is listed in Claude's connector directory:
+  Settings, Connectors)

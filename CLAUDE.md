@@ -97,7 +97,9 @@ CLI gallery indexes it on its own. Checked first: the skill fires from its descr
 (a headless Claude Code session, prompt not naming Oxynet, first action
 `Skill: oxynet:oxynet-cpet`), and the history holds no secret.
 
-Anthropic's plugin directory: submitted from claude.ai/directory/manage, **Plugin bundle**,
-repository `andreazignoli/oxynet-skills`, plugin path `claude`. The MCP server is submitted
-separately as an **MCP connector** (its tools carry the required titles and hints since core
-v66). Both from the founder's own account.
+The MCP server is **published in Anthropic's Connectors Directory** (2026-10-20), submitted
+as an **MCP connector** from the founder's own account; the texts as sent are in the
+orchestration repo, `docs/listings/anthropic-directory.md`. The plugin follows from
+claude.ai/directory/manage as a **Plugin bundle**, repository `andreazignoli/oxynet-skills`,
+plugin path `claude`. A plugin may connect to any connector approved in the directory, so the
+listing also clears the plugin's one MCP server.
