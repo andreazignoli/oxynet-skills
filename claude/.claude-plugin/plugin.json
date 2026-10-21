@@ -1,13 +1,22 @@
 {
   "name": "oxynet",
   "displayName": "Oxynet",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Analyse cardiopulmonary exercise test (CPET) files with Oxynet: ventilatory thresholds, substrate use, oscillatory ventilation and signal quality, computed by validated models.",
-  "author": { "name": "Andrea Zignoli", "url": "https://www.oxynet.net" },
+  "author": {
+    "name": "Andrea Zignoli",
+    "url": "https://www.oxynet.net"
+  },
   "homepage": "https://www.oxynet.net/developers/mcp",
   "repository": "https://github.com/andreazignoli/oxynet-skills",
   "license": "Apache-2.0",
-  "keywords": ["cpet", "exercise-testing", "ventilatory-thresholds", "physiology", "sports-science"],
+  "keywords": [
+    "cpet",
+    "exercise-testing",
+    "ventilatory-thresholds",
+    "physiology",
+    "sports-science"
+  ],
   "icon": "./icon.svg",
   "documentationUrl": "https://www.oxynet.net/developers/mcp",
   "supportUrl": "https://github.com/andreazignoli/oxynet-skills/issues",

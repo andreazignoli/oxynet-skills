@@ -25,9 +25,9 @@ at https://app.oxynet.net/signup.
    once: Oxynet needs no patient identifiers, so anonymise a name or date of birth first.
 4. **Work by handle.** Never read the recording into the conversation. `get_cpet_series`
    is for drawing a picture, never for computing something Oxynet can compute.
-5. **Ask for the smallest thing that answers the question.** `analyze_cpet` takes `vt`,
-   `eov` and `substrate`; `compute_metrics` with `substrate_summary` answers "what is
-   their FATMAX" at a fraction of the cost. Each analysis spends one of the key's monthly
+5. **Ask for the smallest thing that answers the question.** Each analysis is its own
+   tool: `analyze_vt`, `analyze_eov` and `analyze_substrate`. `compute_metrics` with
+   `substrate_summary` answers "what is their FATMAX" at a fraction of the cost. Each analysis spends one of the key's monthly
    allowance.
 6. **A refusal is the answer.** `not_analysable`, `unavailable` or an error code states why;
    report that reason instead of working around it.
