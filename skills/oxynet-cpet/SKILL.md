@@ -11,7 +11,7 @@ the vendor file, it returns a handle (`cpet_id`), and you ask for analyses by na
 orchestrate and explain; Oxynet's validated models decide the physiology.
 
 If an Oxynet MCP connector is already available in this session (tools such as
-`analyze_cpet`), use it instead and ignore the rest of this file.
+`analyze_vt`), use it instead and ignore the rest of this file.
 
 Every command below is self-contained, because shell variables may not survive between
 your commands. `OXYNET_API_URL` is only for testing against another server; leave it unset.

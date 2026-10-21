@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "oxynet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Analyse cardiopulmonary exercise test (CPET) files with Oxynet: ventilatory thresholds, substrate use, oscillatory ventilation and signal quality, computed by validated models.",
   "author": {
     "name": "Andrea Zignoli",
@@ -11,7 +11,13 @@
   "homepage": "https://www.oxynet.net/developers/mcp",
   "repository": "https://github.com/andreazignoli/oxynet-skills",
   "license": "Apache-2.0",
-  "keywords": ["cpet", "exercise-testing", "ventilatory-thresholds", "physiology", "sports-science"],
+  "keywords": [
+    "cpet",
+    "exercise-testing",
+    "ventilatory-thresholds",
+    "physiology",
+    "sports-science"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
@@ -52,7 +58,7 @@
             {
               "description": "Ventilatory thresholds on the synthetic sample",
               "prompt": "Load the Oxynet synthetic sample and give me its ventilatory thresholds.",
-              "tools_triggered": "get_sample_cpet, analyze_cpet",
+              "tools_triggered": "get_sample_cpet, analyze_vt",
               "expected_behavior": "Reports VT1 at about 562 s (VO2 about 2,386 mL/min) and VT2 at about 726 s (VO2 about 2,951 mL/min), says the sample is synthetic and not validation data, and gives no confidence percentage."
             },
             {
@@ -64,7 +70,7 @@
             {
               "description": "Oscillatory ventilation on the oscillating synthetic sample (beta)",
               "prompt": "Load Oxynet's oscillating synthetic sample and check it for exercise oscillatory ventilation.",
-              "tools_triggered": "get_sample_cpet, analyze_cpet",
+              "tools_triggered": "get_sample_cpet, analyze_eov",
               "expected_behavior": "Reports severe oscillatory breathing (ventilation swinging by about 18 L/min every 58 seconds through almost the whole test) and says the analysis is beta: developed on one heart failure cohort, transportability untested."
             },
             {
@@ -93,7 +99,7 @@
         "commerce_description": "Oxynet sells nothing in ChatGPT. API keys are free and issued at app.oxynet.net/signup."
       },
       "publication": {
-        "release_notes": "First release: ventilatory thresholds, substrate use, oscillatory ventilation (beta) and recording quality from CPET exports, through Oxynet's MCP server with OAuth sign-in."
+        "release_notes": "One tool per analysis: analyze_vt, analyze_eov and analyze_substrate replace analyze_cpet, which took a list of analysis names. Ventilatory thresholds, substrate use, oscillatory ventilation (beta) and recording quality from CPET exports, through Oxynet's MCP server with OAuth sign-in."
       }
     }
   }
